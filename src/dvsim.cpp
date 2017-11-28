@@ -1,10 +1,15 @@
 #include <stdio.h>
 
+int min(int x, int y) {
+    return (x < y) ? x : y;
+}
+
 class Graph {
 public:
     Graph(int v): v(v) {
         dist = new int*[v];
         next = new int*[v];
+
         for (int i = 0; i < v; ++i) {
             dist[i] = new int[v];
             next[i] = new int[v];
@@ -12,7 +17,7 @@ public:
             for (int j = 0; j < v; ++j) {
                 if (i == j) {
                     dist[i][j] = 0;
-                    next[i][j] = i;
+                    next[i][j] = j;
                 } else {
                     dist[i][j] = INF;
                     next[i][j] = -1;
@@ -39,20 +44,22 @@ public:
         return e;
     }
 
-    void addEdge(int a, int b) {
-        dist[a][b] = 1;
-        dist[b][a] = 1;
-        next[a][b] = b;
-        next[b][a] = a;
+    void addEdge(int x, int y, int weight) {
+        dist[x][y] = weight;
+        dist[y][x] = weight;
+        next[x][y] = y;
+        next[y][x] = x;
         e++;
     }
 
     void sendInfo(int x, int y) {
         for (int i = 0; i < v; ++i) {
-            int newDist = dist[x][i] + 1;
-            if (dist[y][i] == -1 || newDist < dist[y][i]) {
+            int newDist = dist[y][x] + dist[x][i];
+            if (newDist < dist[y][i]) {
                 dist[y][i] = newDist;
                 next[y][i] = x;
+            } else if (newDist == dist[y][i]) {
+                next[y][i] = min(x, next[y][i]);
             }
         }
     }
@@ -74,7 +81,7 @@ public:
 
 private:
     const int INF = 1001;
-    int v;
+    const int v;
     int e;
     int** dist;
     int** next;
@@ -87,16 +94,16 @@ int main() {
     Graph g(v);
 
     // Add edges to graph
-    for (int i = 0; i < e; ++i) {
+    while (e--) {
         int a, b;
         scanf("%d %d", &a, &b);
-        g.addEdge(--a, --b);
+        g.addEdge(--a, --b, 1);
     }
 
     // Run simulation
     int n;
     scanf("%d", &n);
-    for (int i = 0; i < n; ++i) {
+    while (n--) {
         int x, y;
         scanf("%d %d", &x, &y);
         g.sendInfo(--x, --y);

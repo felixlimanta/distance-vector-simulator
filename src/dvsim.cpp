@@ -14,7 +14,7 @@ public:
                     dist[i][j] = 0;
                     next[i][j] = i;
                 } else {
-                    dist[i][j] = -1;
+                    dist[i][j] = INF;
                     next[i][j] = -1;
                 }
             }
@@ -40,8 +40,6 @@ public:
     }
 
     void addEdge(int a, int b) {
-        a--;
-        b--;
         dist[a][b] = 1;
         dist[b][a] = 1;
         next[a][b] = b;
@@ -50,24 +48,37 @@ public:
     }
 
     void sendInfo(int x, int y) {
-
+        for (int i = 0; i < v; ++i) {
+            int newDist = dist[x][i] + 1;
+            if (dist[y][i] == -1 || newDist < dist[y][i]) {
+                dist[y][i] = newDist;
+                next[y][i] = x;
+            }
+        }
     }
 
     void printGraph() {
         for (int i = 0; i < v; ++i) {
             for (int j = 0; j < v; ++j) {
-                printf("%d %d\n", dist[i][j], next[i][j] + 1);
+                int outDist = dist[i][j];
+                if (outDist == INF)
+                    outDist = -1;
+                int outNext = next[i][j];
+                if (outNext != -1)
+                    outNext++;
+
+                printf("%d %d\n", outDist, outNext);
             }
         }
     }
 
 private:
+    const int INF = 1001;
     int v;
     int e;
     int** dist;
     int** next;
 };
-
 
 int main() {
     // Create empty graph
@@ -79,17 +90,17 @@ int main() {
     for (int i = 0; i < e; ++i) {
         int a, b;
         scanf("%d %d", &a, &b);
-        g.addEdge(a, b);
+        g.addEdge(--a, --b);
     }
 
-    // // Run simulation
-    // int n;
-    // scanf("%d", &n);
-    // for (int i = 0; i < n; ++i) {
-    //     int x, y;
-    //     scanf("%d %d", &x, &y);
-    //     g.sendInfo(x, y);
-    // }
+    // Run simulation
+    int n;
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i) {
+        int x, y;
+        scanf("%d %d", &x, &y);
+        g.sendInfo(--x, --y);
+    }
 
     g.printGraph();
 

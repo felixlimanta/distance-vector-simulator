@@ -14,8 +14,6 @@
 
 ## Implementasi Program
 
-Spesifikasi tugas selengkapnya dapat dilihat [pada tautan berikut][Spek].
-
 Jaringan pada permasalahan dimodelkan dengan sebuah kelas `Graph`.
 
 Ketika program menerima input awal berupa banyak simpul `v` dan banyak sisi `e` dalam jaringan, akan dibentuk objek dari kelas `Graph` dengan jumlah simpul sesuai dengan masukan dan 0 sisi. Kelas `Graph` memiliki 2 matriks bilangan bulat berukuran `v`$\times$`v` untuk merepresentasikan jarak antar simpul (`dist`) dan simpul berikut yang harus dituju (`next`). Matriks `dist` akan diinisalisasi dengan nilai ∞ dan matriks `next` dengan nilai `NUL`, yang berarti simpul asal tidak terhubung dengan simpul tujuan. Jika simpul asal dan tujuan sama, matriks `dist` diinisialisasi dengan 0 dan `next` dengan ID simpul itu sendiri. Proses inisialisasi yang telah dijelaskan tadi dilakukan dalam konstruktor `Graph(v)`, di mana `v` adalah jumlah simpul dalam graf.
@@ -43,5 +41,3 @@ Pada implementasinya saat ini, _link state_ lebih banyak digunakan untuk aplikas
 - **13515035** - Input/Output, Readme
 - **13515065** - Algoritma
 - **13515089** - Makefile, Readme
-
-[Spek]: ./doc/Spesifikasi Tubes 2 - Distance Vector Simulation.pdf

@@ -2,9 +2,11 @@
 
 ### Oleh
 
-Kelompok 
+
 13515035 - Oktavianus Handika
+
 13515065 - Felix Limanta
+
 13515089 - Vincent Hendryanto Halim
 
 ## Petunjuk Penggunaan Program
@@ -28,7 +30,9 @@ Setiap kali menerima input node asal yang mengirimkan informasi ke suatu node tu
 ## Pembagian Tugas
 
 13515035 - Input/Output, Readme
+
 13515065 - Algoritma
+
 13515089 - Makefile, Readme
 
 

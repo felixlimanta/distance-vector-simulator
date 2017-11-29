@@ -11,6 +11,9 @@ dvsim: dvsim.o
 dvsim.o: ./src/dvsim.cpp
 	$(CC) -c ./src/dvsim.cpp $(CXXFLAGS)
 
+run: dvsim.exe
+	@dvsim.exe
+
 zip:
 	jar -cMf TB1_K02_08_KapanKelarYa.zip src/* data/* Makefile README.md
 

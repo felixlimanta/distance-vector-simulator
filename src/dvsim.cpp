@@ -20,7 +20,7 @@ public:
                     next[i][j] = j;
                 } else {
                     dist[i][j] = INF;
-                    next[i][j] = -1;
+                    next[i][j] = NUL;
                 }
             }
         }
@@ -44,7 +44,7 @@ public:
         return e;
     }
 
-    void addEdge(int x, int y, int weight) {
+    void addEdge(int x, int y, int weight = 1) {
         dist[x][y] = weight;
         dist[y][x] = weight;
         next[x][y] = y;
@@ -71,7 +71,7 @@ public:
                 if (outDist == INF)
                     outDist = -1;
                 int outNext = next[i][j];
-                if (outNext != -1)
+                if (outNext != NUL)
                     outNext++;
 
                 printf("%d %d\n", outDist, outNext);
@@ -81,6 +81,7 @@ public:
 
 private:
     const int INF = 1001;
+	const int NUL = -1;
     const int v;
     int e;
     int** dist;
@@ -97,7 +98,7 @@ int main() {
     while (e--) {
         int a, b;
         scanf("%d %d", &a, &b);
-        g.addEdge(--a, --b, 1);
+        g.addEdge(--a, --b);
     }
 
     // Run simulation
@@ -113,4 +114,3 @@ int main() {
 
     return 0;
 }
-
